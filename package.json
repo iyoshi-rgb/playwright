@@ -2,6 +2,7 @@
   "name": "playwright-docker",
   "version": "1.0.0",
   "dependencies": {
-    "playwright": "^1.47.1"
+    "playwright": "^1.47.1",
+    "express": "^4.18.2"
   }
 }

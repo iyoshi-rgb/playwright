@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>スクリーンショット撮影</title>
+</head>
+<body>
+  <h1>スクリーンショット撮影</h1>
+  <button id="screenshot-button">スクリーンショットを撮影</button>
+  <p id="message"></p>
+
+  <script>
+    document.getElementById('screenshot-button').addEventListener('click', () => {
+      fetch('/take-screenshot', { method: 'POST' })
+        .then(response => response.text())
+        .then(text => {
+          document.getElementById('message').textContent = text;
+        })
+        .catch(error => {
+          document.getElementById('message').textContent = 'エラーが発生しました';
+          console.error(error);
+        });
+    });
+  </script>
+</body>
+</html>

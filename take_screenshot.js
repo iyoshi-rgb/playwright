@@ -1,16 +1,18 @@
 const { chromium } = require('playwright');
+const path = require('path');
 
 (async () => {
-  const date = new Date();
-  const day = date.getTime();
-  // ブラウザを起動
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const screenshotPath = path.join(__dirname, `screenshot-${timestamp}.png`);
+
   const browser = await chromium.launch();
-  // 新しいページを作成
+
   const page = await browser.newPage();
-  // 任意のURLに移動
-  await page.goto('https://iyoshi-rgb.github.io/iyoshi.io/');
-  // スクリーンショットを撮影
-  await page.screenshot({ path: `screenshot${day}.png` });
-  // ブラウザを閉じる
+
+  await page.goto('http://localhost:3000');
+
+  await page.screenshot({ path: screenshotPath, fullPage: true });
   await browser.close();
+
+  console.log(`スクリーンショットを保存しました: ${screenshotPath}`);
 })();
